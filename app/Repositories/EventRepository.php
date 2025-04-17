@@ -37,6 +37,14 @@ class EventRepository implements EventRepositoryInterface
     public function paginateAndFilter(array $filters): LengthAwarePaginator {
         $query = Event::query();
  
+        if (!empty($filters['title'])) {
+            $query->where('title', 'like', '%' . $filters['title'] . '%');
+        }
+
+        if (!empty($filters['description'])) {
+            $query->where('description', $filters['description']);
+        }
+
         return $query->paginate($filters['per_page'] ?? 10);
     }
 }
