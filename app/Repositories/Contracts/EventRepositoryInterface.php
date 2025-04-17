@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Repositories\Contracts;
+  
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;  
 
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+interface EventRepositoryInterface {
 
-interface AttendeeRepositoryInterface
-{
     public function all();
     public function find($id);
     public function create(array $data);

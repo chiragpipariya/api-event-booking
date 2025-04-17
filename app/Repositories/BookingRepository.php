@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Booking;
 use App\Models\Event;
 use App\Repositories\Contracts\BookingRepositoryInterface;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class BookingRepository implements BookingRepositoryInterface
 {
@@ -32,5 +33,11 @@ class BookingRepository implements BookingRepositoryInterface
     {
         $booking = Booking::findOrFail($id);
         return $booking->delete();
+    }
+
+    public function paginateAndFilter(array $filters): LengthAwarePaginator {
+        $query = Booking::query();
+ 
+        return $query->paginate($filters['per_page'] ?? 10);
     }
 }

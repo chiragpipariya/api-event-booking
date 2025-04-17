@@ -6,7 +6,8 @@ use App\Http\Requests\StoreAttendeeRequest;
 use App\Http\Requests\UpdateAttendeeRequest;
 use App\Services\AttendeeService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
  
 class AttendeeController extends Controller
@@ -19,21 +20,23 @@ class AttendeeController extends Controller
     }
 
  
-    public function index()
-    {
+    public function index(Request $request): JsonResponse {
+        $attendees = $this->service->getPaginated($request->all());
+
         return response()->json([
             'status' => true,
             'message' => 'List fetched.',
-            'data' => $this->service->getAll()
+            'data' => $attendees
         ]);
     }
  
     public function store(StoreAttendeeRequest $request)
     { 
+        $attendees = $this->service->create($request->validated());
         return response()->json([
             'status' => true,
             'message' => 'created successfully.',
-            'data' => $this->service->create($request->validated())
+            'data' => $attendees
         ], 201);
     }
 

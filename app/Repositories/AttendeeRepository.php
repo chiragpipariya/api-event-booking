@@ -2,7 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Models\Attendee;
+use App\Models\Attendee; 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Repositories\Contracts\AttendeeRepositoryInterface;
 
 class AttendeeRepository implements AttendeeRepositoryInterface
@@ -33,5 +34,19 @@ class AttendeeRepository implements AttendeeRepositoryInterface
     {
         $attendee = Attendee::findOrFail($id);
         return $attendee->delete();
+    }
+
+    public function paginateAndFilter(array $filters): LengthAwarePaginator {
+        $query = Attendee::query();
+
+        if (!empty($filters['name'])) {
+            $query->where('name', 'like', '%' . $filters['name'] . '%');
+        }
+
+        if (!empty($filters['email'])) {
+            $query->where('email', $filters['email']);
+        }
+
+        return $query->paginate($filters['per_page'] ?? 10);
     }
 }

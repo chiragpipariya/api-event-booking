@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\Contracts\BookingRepositoryInterface;
 use App\Models\Booking;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class BookingService
 {
@@ -16,6 +17,10 @@ class BookingService
     public function getAll()
     {
         return $this->bookingRepo->all();
+    }
+
+    public function getPaginated(array $filters): LengthAwarePaginator {
+        return $this->bookingRepo->paginateAndFilter($filters);
     }
 
     public function bookEvent(array $data): Booking|string {

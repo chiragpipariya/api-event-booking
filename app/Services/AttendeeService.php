@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Repositories\Contracts\AttendeeRepositoryInterface;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+
 
 class AttendeeService
 {
@@ -16,6 +18,10 @@ class AttendeeService
     public function getAll()
     {
         return $this->repository->all();
+    }
+
+    public function getPaginated(array $filters): LengthAwarePaginator {
+        return $this->repository->paginateAndFilter($filters);
     }
 
     public function getById($id)
