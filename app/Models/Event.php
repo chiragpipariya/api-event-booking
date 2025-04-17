@@ -13,4 +13,8 @@ class Event extends Model
         'title', 'description', 'date', 'country', 'capacity'
     ];
  
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
 }
