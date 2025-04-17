@@ -147,30 +147,7 @@ php artisan test
 
 ## 📊 Database Schema (ER Diagram)
 
-### Tables:
-- **events**
-  - `id`
-  - `name`
-  - `description`
-  - `country`
-  - `date`
-  - `capacity`
-
-- **attendees**
-  - `id`
-  - `name`
-  - `email`
-  - `phone`
-
-- **bookings**
-  - `id`
-  - `event_id`
-  - `attendee_id`
-
-### Constraints:
-- `event_id` → foreign key → `events.id`
-- `attendee_id` → foreign key → `attendees.id`
-- `UNIQUE(event_id, attendee_id)` → Prevents duplicate bookings
+![alt text](public/image-database.png)
 
 ---
 
