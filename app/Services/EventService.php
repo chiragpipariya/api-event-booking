@@ -3,7 +3,7 @@ namespace App\Services;
 
 use App\Models\Event;
 use App\Repositories\EventRepository;
-
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 class EventService
 {
     protected $eventRepo;
@@ -15,26 +15,30 @@ class EventService
 
     public function getAllEvents()
     {
-        return $this->eventRepo->getAll();
+        return $this->eventRepo->all();
     }
 
-    public function getEvent($id)
+    public function getPaginated(array $filters): LengthAwarePaginator {
+        return $this->eventRepo->paginateAndFilter($filters);
+    }
+
+    public function find($id)
     {
-        return $this->eventRepo->findById($id);
+        return $this->eventRepo->find($id);
     }
 
-    public function createEvent(array $data)
+    public function create(array $data)
     {
         return $this->eventRepo->create($data);
     }
 
-    public function updateEvent(Event $event, array $data)
+    public function update($id, array $data)
     {
-        return $this->eventRepo->update($event, $data);
+        return $this->eventRepo->update($id, $data);
     }
 
-    public function deleteEvent(Event $event)
+    public function delete($id)
     {
-        return $this->eventRepo->delete($event);
+        return $this->eventRepo->delete($id);
     }
 }

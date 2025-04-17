@@ -5,8 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBookingRequest;
 use App\Services\BookingService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+use Illuminate\Database\Eloquent\ModelNotFoundException; 
+use Illuminate\Http\Request;
 class BookingController extends Controller
 {
     protected BookingService $bookingService;
@@ -15,12 +15,13 @@ class BookingController extends Controller
         $this->bookingService = $bookingService;
     }
 
-    public function index()
+    public function index(Request $request): JsonResponse
     {
+
         return response()->json([
             'status' => true,
             'message' => 'List fetched.',
-            'data' => $this->bookingService->getAll()
+            'data' => $this->bookingService->getPaginated($request->all())
         ]);
     }
 
