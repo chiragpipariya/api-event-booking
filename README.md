@@ -5,62 +5,191 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+</p> 
 
-## About Laravel
+# 🎟️ Laravel Event Booking API
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+A RESTful API system built with Laravel 12 and MySQL that allows managing events, attendees, and event bookings with proper validation, pagination, filtering, structured responses, and test coverage.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## ✅ Features
 
-## Learning Laravel
+- 🗓️ Event Management Api
+- 👥 Attendee Management Api
+- 📅 Event Booking System Api
+  - Prevent **duplicate bookings**
+  - Prevent **overbooking**
+- 🧾 Request Validation
+- ✅ Structured JSON API Responses
+- 🔍 Pagination & Filtering
+- 🧱 Repository + Service Layer Architecture
+- 🧪 Unit Tests for all core features
+- 🧼 Swagger API Documentation
+- ⚙️ Test and Factories
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 📦 Tech Stack
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Laravel 12**
+- **MySQL** 
+- **PHPUnit**
+- **Repository + Service Design Patterns**
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 📁 Installation & Setup
 
-### Premium Partners
+### 1️⃣ Clone the Repository
+```
+git clone https://github.com/your-username/event-booking-api.git
+cd event-booking-api 
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 2️⃣ Install Dependencies
+```
+composer install
+```
 
-## Contributing
+### 3️⃣ Set Environment Variables
+```
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Update your .env with DB credentials:
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=event_booking
+DB_USERNAME=root
+DB_PASSWORD=your_password
+```
 
-## Code of Conduct
+### 4️⃣ Run Migrations
+```
+php artisan migrate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 6️⃣ Start Development Server
+```
+php artisan serve
+```
 
-## Security Vulnerabilities
+### 7️⃣ Postman APIs Documentation
+[API Documentation postman LINK](https://documenter.getpostman.com/view/28228721/2sB2cd3dBn)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+
+---
+
+## 🚀 API Endpoints
+
+### 🗓️ Events
+- `GET /api/events` — List events with filters & pagination  
+- `POST /api/events` — Create new event  
+- `PUT /api/events/{id}` — Update an existing event  
+- `DELETE /api/events/{id}` — Delete an event  
+
+### 👥 Attendees
+- `GET /api/attendees` — List attendees with pagination & search  
+- `POST /api/attendees` — Register new attendee  
+- `PUT /api/attendees/{id}` — Update an attendee  
+- `DELETE /api/attendees/{id}` — Delete an attendee  
+
+### 📅 Bookings
+- `POST /api/bookings` — Book an attendee to an event  
+  - ✅ Validates event capacity (no overbooking)  
+  - ✅ Prevents duplicate bookings  
+- `GET /api/bookings` — List bookings with pagination
+- `DELETE /api/bookings/{id}` — Delete an bookings  
+
+---
+
+## 🔍 Filters & Pagination
+
+- `GET /api/events?country=India` — Filter events by country  
+- `GET /api/attendees?name=john` — Search attendees by name/email/phone  
+- `GET /api/events?page=2&per_page=10` — Paginate events  
+
+---
+
+## 🧱 Design Patterns Used
+
+- **Repository Pattern** – Clean abstraction over database logic  
+- **Service Layer** – Business rules are handled outside controllers  
+- **Form Request Validation** – Validates incoming payloads  
+- **Swagger Annotations** – Auto-generated OpenAPI documentation  
+- **Factory Pattern** – Used in testing and seeding  
+
+---
+
+## 🧪 Testing
+
+### Run All Tests
+
+```
+php artisan test
+```
+
+---
+
+## ✅ Covered Cases
+
+- ✅ **Successful Event Booking**
+- 🚫 **Duplicate Booking Prevention**
+- 🚫 **Overbooking Prevention**
+- ❌ **Validation Failures**
+- ✅ **CRUD for Events and Attendees**
+
+---
+
+## 📊 Database Schema (ER Diagram)
+
+### Tables:
+- **events**
+  - `id`
+  - `name`
+  - `description`
+  - `country`
+  - `date`
+  - `capacity`
+
+- **attendees**
+  - `id`
+  - `name`
+  - `email`
+  - `phone`
+
+- **bookings**
+  - `id`
+  - `event_id`
+  - `attendee_id`
+
+### Constraints:
+- `event_id` → foreign key → `events.id`
+- `attendee_id` → foreign key → `attendees.id`
+- `UNIQUE(event_id, attendee_id)` → Prevents duplicate bookings
+
+---
+
+## 📷 See ER Diagram:
+
+[📸 Include ER Diagram Image Here or Link to Diagram Tool]
+
+---
+
+## 📂 Project Structure
+
+![alt text](public/image.png)
+ 
+## 📂 Test Cases Results 
+
+![alt text](public/image-test-cases.png)
+
 
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
