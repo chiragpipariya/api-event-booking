@@ -12,6 +12,7 @@
 A RESTful API system built with Laravel 12 and MySQL that allows managing events, attendees, and event bookings with proper validation, pagination, filtering, structured responses, and test coverage.
 
 ---
+ 
 
 ## ✅ Features
 
@@ -25,7 +26,7 @@ A RESTful API system built with Laravel 12 and MySQL that allows managing events
 - 🔍 Pagination & Filtering
 - 🧱 Repository + Service Layer Architecture
 - 🧪 Unit Tests for all core features
-- 🧼 Swagger API Documentation
+- 🧼 Postman API Documentation
 - ⚙️ Test and Factories
 
 ---
@@ -119,9 +120,9 @@ php artisan serve
 
 - **Repository Pattern** – Clean abstraction over database logic  
 - **Service Layer** – Business rules are handled outside controllers  
-- **Form Request Validation** – Validates incoming payloads  
+- **Request Validation** – Validates incoming payloads  
 - **Swagger Annotations** – Auto-generated OpenAPI documentation  
-- **Factory Pattern** – Used in testing and seeding  
+- **Factory Pattern** – Used in testing and facker data  
 
 ---
 
