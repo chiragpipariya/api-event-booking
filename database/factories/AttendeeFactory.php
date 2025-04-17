@@ -1,7 +1,8 @@
 <?php
 
 namespace Database\Factories;
-
+ 
+use App\Models\Attendee;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class AttendeeFactory extends Factory
 {
+    protected $model = Attendee::class;
+
     /**
      * Define the model's default state.
      *
@@ -17,7 +20,9 @@ class AttendeeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name'  => $this->faker->name,
+            'email' => $this->faker->unique()->safeEmail,
+            'phone' => $this->faker->numerify(rand(5566778844,1223299898)),
         ];
     }
 }
